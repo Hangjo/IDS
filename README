@@ -1,0 +1,25 @@
+Installation:
+	Place packetsniff, updatedb, and ports.txt in the directory of your choice.
+	Run sudo ./packetsniff
+	All required items will be install and created, the IDS will start scanning after installion is done.
+Usage:
+	sudo ./packetsniff - This will start the IDS
+	sudo ./updatedb - This will update the database that holds rules and content to look for
+
+Compiling:
+	A Makefile is included with this, type 'make' in the terminal to compile.
+	'make clean' will remove all executables
+
+Files:
+	packetsniff.c - Gets packets from network and sends them to be scanned through scanpacket.c
+	scanpacket.c - Searches through packet payload for content listed in the IDS database. Any detection options and modifier will also be applied here
+	boyermoore.c - Search algorithm used by scanpacket to search for content in payload
+	readrules.c - Reads rules from the community.rules file in the mysql database
+	updatedb.c - Updates the mysql database when any rules are added, modified, or removed, this is also called everytime the community.rules are downloaded at 6 a.m.
+	port.c - Reads ports from port.txt into the mysql database
+	logpacket.c - When a malicious packet is found, it is sent here to be placed in a log file and an email is sent out to all addresses listed in emails.txt
+	startup.c - Ensures mysql and sendmail have been installed on the machine and creates any necessary files for the IDS to run, creates database and tables
+
+	ports.txt - Contains lists of ports with list names to be read into the database for packet comparison
+	emails.txt - List of emails that will receive alerts whenever malicious activity is found
+	community.rules - List of rules with their requirements downloaded from Snort's website

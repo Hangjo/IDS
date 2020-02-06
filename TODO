@@ -1,0 +1,4 @@
+-Save user changes to rule file so they remain after new file is downloaded.
+-Detection options
+-Create ports.txt on startup
+-Improve startup, right now it just checks if the Logs folder is in the same directory instead of just initial start
